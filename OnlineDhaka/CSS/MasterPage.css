@@ -1,0 +1,409 @@
+﻿body {
+    text-align: left;
+}
+
+
+#wrap {
+    height: 800px;
+    width: 960px;
+    margin: auto;
+    background-color: rgba(243, 243, 243, 0.60);
+}
+
+#header {
+    height: 117px; /*rgba(243, 243, 243, 0.60) rgba(222, 218, 218, 0.50)*/
+    width: 100%;
+    background-color: rgba(243, 243, 243, 0.60);
+    text-align: center;
+    font-family: sans-serif Cambria;
+    font-size: 15px;
+    color: #f00;
+    border-bottom: 3px solid white;
+}
+
+#header #profile {
+     float:right;
+     margin-top:40px;
+     margin-right:20px;
+     border:2px solid double;
+
+}
+
+.log_reg a:hover {
+    font-size: 18px;
+    background-color: chocolate;
+}
+
+#content_body {
+    height: 800px;
+    width: 960px;
+}
+
+#wrap #content_body #left_segment {
+    height: 800px;
+    width: 197px;
+    /*background-color:red;*/
+    float: left;
+    border-right: 3px solid white;
+    background-color: rgba(243, 243, 243, 0.60);
+}
+
+    #wrap #content_body #left_segment #product_category {
+        height: 200px;
+        /*min-height:30px;*/
+        background-color: khaki;
+        width: 195px;
+        margin: auto;
+        border-bottom: 1px solid white;
+    }
+
+        #wrap #content_body #left_segment #product_category #CategoryDropDown {
+            margin-left: 20px;
+            margin-top: 5px;
+            width: 140px;
+            height: auto;
+            /*min-height:25px;*/
+        }
+
+
+
+    #wrap #content_body #left_segment #area {
+        height: 200px;
+        width: 195px;
+        margin: auto;
+        margin-top: 1px;
+        border-bottom: 1px solid white;
+        background-color: darkkhaki;
+    }
+
+        #wrap #content_body #left_segment #area #AreaDropDown {
+            margin-left: 20px;
+            margin-top: 5px;
+            width: 140px;
+            height: 25px;
+            position: relative;
+            top: 0px;
+            left: 0px;
+        }
+
+
+    #wrap #content_body #left_segment #price {
+        height: 300px;
+        width: 195px;
+        font-family: sans-serif;
+        font-size: 15px;
+        margin: auto;
+        margin-top: 1px;
+        background-color: orange;
+    }
+
+        #wrap #content_body #left_segment #price #PriceLimitDropDown {
+            margin-left: 20px;
+            margin-top: 5px;
+            width: 140px;
+            height: 25px;
+        }
+
+#wrap #content_body #main_content {
+    height: 800px;
+    width: 560px;
+    background-color: rgba(243, 243, 243, 0.60);
+    float: left;
+    /*text-align:center;*/
+    /*border:3px solid #f00;*/
+    min-height: 400px;
+    /*margin-right: 399px;*/
+}
+
+#search {
+    background: #908E8F;
+    border: 1px solid black;
+    padding: 5px;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+    width: 534px;
+}
+
+#wrap #content_body #main_content #search #TextBox2 {
+    margin-right: 40px;
+    border: 1px solid black;
+    border-right-style: inset;
+    -moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+    margin-left: 10px;
+}
+
+#wrap #content_body #main_content #search #Button1 {
+    background-color: brown;
+}
+
+#ContentPlaceHolder_bannerImg {
+    margin-top: 20px;
+}
+
+
+/*.tableCol {
+    border-right:2px solid #fff;
+    text-align:center;
+    height: 30px;
+    color:white;
+}*/
+/*#wrap #content_body #main_content #nav_key #p{
+    margin-bottom:0px;
+    margin-top:0px;
+    display:inline;
+    margin:0px;
+    background-color:#fff;
+   
+}*/
+
+#wrap #content_body #right_segment {
+    height: 800px;
+    width: 197px;
+    background-color: rgba(243, 243, 243, 0.60);
+    float: right;
+    overflow: hidden;
+    border-left: 3px solid white;
+}
+
+    #wrap #content_body #right_segment #ad1 {
+        height: 200px;
+        width: 195px;
+        margin: 0px auto auto auto;
+        border-bottom: 1px solid white;
+        background-color: orange;
+        overflow: hidden;
+        padding-bottom: 10px;
+    }
+    /*#wrap #content_body #right_segment #wish {
+     text-decoration: none;
+     text-align: center;
+     float: left;
+    padding-top: 40px;
+    color:black;
+    
+    }*/
+
+    /*#wrap #content_body #right_segment #forum {
+     text-decoration: none;
+     text-align: center;
+     float: left;
+    padding-top: 40px;
+    color:black;
+    
+    }*/
+    #wrap #content_body #right_segment #ad2 {
+        height: 200px;
+        width: 195px;
+        margin: auto;
+        margin-top: 1px;
+        border-bottom: 1px solid white;
+        background-color: orange;
+        overflow: hidden;
+        padding-bottom: 10px;
+    }
+
+    #wrap #content_body #right_segment #ad3 {
+        height: 200px;
+        width: 195px;
+        margin: auto;
+        margin-top: 1px;
+        border-bottom: 1px solid white;
+        background-color: orange;
+        padding-bottom: 10px;
+        float: right;
+    }
+
+#footer {
+    text-align: center;
+    margin: auto;
+    color: green;
+    background-color: rgba(243, 243, 243, 0.60);
+    border-top: 3px solid white;
+    /*position:absolute;*/
+    padding: 10px;
+    /*overflow:auto;*/
+    /*border: 1px solid black;*/
+}
+
+
+/**********************************************************   Electronics   ****************************************/
+
+
+.listItem a {
+    padding-top: 5px;
+    font-size: 18px;
+    text-decoration: none;
+}
+
+.productlist a:hover {
+    font-size: 19px;
+}
+
+/*****************************************************Admin******************************/
+
+#Content2 #searchDiv {
+    padding-top: 100px;
+}
+
+/*default */
+.portion2 {
+    height: 100px;
+}
+
+
+
+.CatagoriesTable {
+    width: 100%;
+    height: 250px;
+    margin: 10px 10px 10px 0;
+    border: 3px solid #E3E3E3;
+    border-radius: 10px;
+    -moz-border-radius: 10px;
+}
+
+    .CatagoriesTable tr th, .CatagoriesTable tr td {
+        text-align: left;
+        padding: 0px 5px 0 5px;
+    }
+
+    .CatagoriesTable img {
+        padding: 0px 10px 10px 10px;
+        height: 150px;
+        width: 150px;
+    }
+
+/*gridview*/
+.cssgridview {
+    background-color: orange;
+    margin: auto auto auto 16px;
+    padding-bottom: 20px;
+    border-collapse: collapse;
+    text-align: center;
+}
+
+
+
+
+    .cssgridview td {
+        border: solid 1px #fff;
+        color: #717171;
+    }
+
+    .cssgridview th {
+        padding: 4px 2px;
+        color: #fff;
+        background: #424242 url(./IMG/L9efC.png)repeat-x top;
+        border-left: solid 1px black;
+    }
+
+    .cssgridview .pgr {
+        background: #424242 repeat-x top;
+    }
+
+        .cssgridview .pgr table {
+            margin: 5px 0;
+        }
+
+        .cssgridview .pgr td {
+            border-width: 0;
+            padding: 0 6px;
+            border-left: solid 1px #666;
+            font-weight: bold;
+            color: white;
+        }
+
+        .cssgridview .pgr a {
+            color: #666;
+            text-decoration: none;
+        }
+
+            .cssgridview .pgr a:hover {
+                color: #000;
+                text-decoration: underline;
+            }
+
+
+
+/*detailsview*/
+
+
+.cssdetailsview {
+    background-color: #fff;
+    margin: 5px 0 10px 0px;
+    border: solid 1px #525252;
+    border-collapse: collapse;
+    text-align: center;
+    font-variant: small-caps;
+}
+
+    .cssdetailsview td {
+        padding: 10px;
+        border: solid 1px #c1c1c1;
+        color: #717171;
+        text-align: left;
+    }
+
+    .cssdetailsview .header td {
+        padding: 4px 2px;
+        color: silver;
+        background: #424242 url(./IMG/L9efC.png)repeat-x top;
+        border-left: solid 1px #525252;
+        font-size: small;
+    }
+
+    .cssdetailsview .fieldheader {
+        color: red;
+        width: 150px;
+        text-align: right;
+    }
+
+    .cssdetailsview .altrow {
+        background: #fcfcfc url(./IMG/wi.png)repeat-x top;
+    }
+
+    .cssdetailsview .command {
+        background: #424242 url(./IMG/wi.png)repeat-x top;
+        line-height: 20px;
+    }
+
+        .cssdetailsview .command td {
+            text-align: center;
+        }
+
+        .cssdetailsview .command a {
+            color: silver;
+            text-decoration: none;
+        }
+
+            .cssdetailsview .command a:hover {
+                color: silver;
+                text-decoration: underline;
+            }
+
+    .cssdetailsview .pager {
+    }
+
+
+/*textbox design*/
+
+#TextBoxAdname {
+    border: 3px solid gray;
+    width: 368px;
+    height: 33px;
+    color: silver;
+    font-size: 22px;
+    padding-left: 10px;
+    border: 2px solid red;
+    border-radius: 7px;
+    font-size: 20px;
+    padding: 5px;
+}
+
+    #TextBoxAdname:focus {
+        outline: none;
+        border-color: blue;
+        box-shadow: 0 0 10px blue;
+    }
