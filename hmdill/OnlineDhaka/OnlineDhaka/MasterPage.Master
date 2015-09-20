@@ -1,0 +1,673 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="MasterPage.master.cs" Inherits="OnlineDhaka.MasterPage" %>
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <link rel="stylesheet" href="CSS/MasterPage.css" />
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+     <title>HomeDeal</title>
+    <script src="dist/sweetalert.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="dist/sweetalert.css"/>
+    <link href="CSS/bootstrap-theme.min.css" rel="stylesheet" />
+    <link href="CSS/bootstrap.min.css" rel="stylesheet" />
+    <script src="http://tristanedwards.me/u/SweetAlert/lib/sweet-alert.css"></script>
+    <script src="http://tristanedwards.me/u/SweetAlert/lib/sweet-alert.js"></script>
+    <script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
+     <link href="CSS/flexslider.css" rel="stylesheet" />
+     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+    <script src="http://malsup.github.com/jquery.cycle2.js"></script>
+    <script src="http://malsup.github.io/jquery.cycle2.tile.js"></script>
+
+    <style type="text/css">
+        .cycle-slideshow {
+            width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            border: 2px solid;
+            border-radius: 25px;
+            -moz-border-radius: 25px;
+        }
+
+            .cycle-slideshow img {
+                width: 50px;
+                margin-left: auto;
+                margin-right: auto;
+                border: 2px solid;
+                border-radius: 25px;
+                -moz-border-radius: 25px;
+                width: 100%;
+            }
+
+        .log {
+            padding-right: 15px;
+            text-decoration: none;
+            /*width:90px; height:50px;*/
+        }
+    </style>
+
+    <style type="text/css">
+        .textbox {
+            width: 368px;
+            height: 20px;
+            color: black;
+            font-size: 14px;
+            padding-left: 10px;
+            border: 2px solid green;
+            border-radius: 7px;
+            font-size: 14px;
+            padding: 5px;
+            /*.textbox:focus;
+
+        {
+            outline: none;
+            border-color: blue;
+            box-shadow: 0 0 10px blue;
+        }*/
+        }
+
+            .textbox:focus {
+                outline: none;
+                border-color: blue;
+                box-shadow: 0 0 10px blue;
+            }
+
+        .login-frame {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            display: none;
+        }
+
+        .login-box {
+            width: 400px;
+            height: 200px;
+            padding: 20px;
+            margin: auto;
+            top: -165px;
+            box-shadow: 0 0 10px #CCC;
+            border-radius: 5px;
+            background-color: rgba(58, 135, 173, 0.90);
+            position: relative;
+        }
+
+        .form-groupm {
+            margin-bottom: 10px;
+        }
+
+            .form-groupm .form-control {
+                margin-left: 82px;
+                width: 275px;
+                height: 30px;
+                padding: 0 5px 0 5px;
+                font-size: 16px;
+                border-radius: 5px;
+                border: solid 1px #CCCCCC;
+                color: #999;
+            }
+
+            .form-groupm .form-label {
+                width: 30px;
+                font-size: 18px;
+                display: block;
+                float: left;
+                line-height: 30px;
+                padding-right: 5px;
+                color: #333;
+            }
+
+        .login-msg {
+            border: solid 1px #bce8f1;
+            text-align: center;
+            line-height: 30px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            color: rgba(58, 135, 173, 0.90);
+            background-color: rgba(217, 237, 247, 0.99);
+        }
+
+            .login-msg.success {
+                color: rgba(70, 136, 71, 0.96);
+                background-color: rgba(223, 240, 216, 0.97);
+                border-color: rgba(214, 233, 198, 0.98);
+            }
+
+            .login-msg.error {
+                color: rgba(185, 74, 72, 0.98);
+                background-color: rgba(242, 222, 222, 0.98);
+                border-color: rgba(238, 211, 215, 0.98);
+            }
+
+        .login-actions {
+            text-align: right;
+        }
+
+        .bbtn {
+            height: 40px;
+            width: 100px;
+            display: inline-block;
+            padding: 6px 12px;
+            margin-bottom: 0;
+            font-size: 14px;
+            text-align: center;
+            white-space: nowrap;
+            vertical-align: middle;
+            cursor: pointer;
+            border: 1px solid transparent;
+            border-radius: 4px;
+        }
+
+        .login-btn {
+            color: #ffffff;
+            background-color: #5cb85c;
+            border-color: #4cae4c;
+        }
+
+            .login-btn:hover {
+                background-color: #458a45;
+            }
+
+        .close-login {
+            color: #ffffff;
+            background-color: #5cb85c;
+            border-color: #4cae4c;
+        }
+
+            .close-login:hover {
+                background-color: #458a45;
+            }
+
+        }
+    </style>
+
+
+<%--    --------------popup-------------------%>
+
+    <script>
+        $(function () {
+            $(document).on('click', '.open-login', function (e) {
+                $('#msg').removeClass();
+                $('#msg').addClass("login-msg").text('Please login below');
+                $('#username').val('');
+                $('#password').val('');
+                $('.login-frame').fadeIn(500);
+                $('.login-box').animate({ 'top': '50px' }, 500);
+                e.preventDefault();
+            });
+            $(document).on('click', '.close-login', function (e) {
+                $('.login-box').animate({ 'top': '-165px' }, 500);
+                $('.login-frame').fadeOut(500);
+                $('#username').val('');
+                $('#password').val('');
+                e.preventDefault();
+            });
+
+        });
+    </script>
+    
+
+   <%-- <script>
+         $(document).ready(function () {
+             $('.slideshow').cycle({
+                 fx: 'fade' // choose your transition type, ex: fade, scrollUp, shuffle, etc...
+             });
+         });
+     </script> --%>
+    
+    
+    
+    <asp:ContentPlaceHolder ID="head" runat="server">
+        
+       
+    <%--<asp:Label ID="lblShare" runat="server" Text=""></asp:Label>--%>
+
+    </asp:ContentPlaceHolder>
+
+
+    <%--<script type="text/javascript">
+        function adjustHeight()
+        {
+           //var drpdwn = document.getElementById('<%=CategoryDropDown.ClientID %>');
+            //drpdwn.setAttribute("height", "100px");//
+            document.getElementById('product_category').style.height = "100px";
+
+        }
+    </script>--%>
+    <style type="text/css">
+        #form1 {
+        }
+
+        .navbar-btn.btn-sm {
+            margin-left: 0px;
+        }
+
+        .auto-style1 {
+            color: #000000;
+            font-weight: bold;
+        }
+    </style>
+    <%--navi--%>
+   
+</head>
+<body style="font-size:14px";>
+    
+   <form id="form1" runat="server"> 
+       
+        
+       
+
+
+        <div id="wrap"><%--wrap--%>
+
+    
+            swal("Here's a message!")
+            <div id="" >  <%--header--%>
+                <nav class="navbar navbar-inverse navbar-fixed-top">
+                    <div class="container">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse" >
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a href="Default.aspx" class="navbar-brand">
+                            HomeDeal
+                        </a>
+                        </div>
+               <%-- <div id="headImg">
+                    <asp:HyperLink runat="server" ID="headImg1" NavigateUrl="~/Default.aspx"> <img src="IMG/logo2.jpg" style="height:107px; width:29%;float:left; background-color:aliceblue"; /></asp:HyperLink>
+                </div>--%>
+
+                
+                  <%--navi--%>  
+
+
+                <%--navi--%>
+                
+                <div class="collapse navbar-collapse" id="navbar-collapse">
+                    <ul class="nav navbar-nav">
+                        <li><a href="AllAds.aspx">AllAds</a></li>
+                        <li class="divider"></li>
+                        <li><a href="Help.aspx">Helps And Support</a></li>
+                        <li class="divider"></li>
+                        
+                        <li style="padding-right:450px"><a href="ContactUs.aspx">Contact Us</a></li>
+                        <li class="divider"></li>
+                        
+                        <li ><a href="register.aspx">Register</a></li>
+                        <li class="divider"></li>
+                        <li style=""><asp:HyperLink ID="HyperLink1" runat="server" CssClass="log btn"  ></asp:HyperLink></li> <%--data-toggle="modal" data-target="#mymodal"--%>
+                        <li class="divider"></li>
+                        <li>
+                        <asp:Button CssClass="btn-success navbar-btn btn-sm" ID="Button2" runat="server" Text="বাংলা" />
+                    </li>
+                        
+                            </ul>
+                    </div>
+                   <%-- <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            
+                                <div class="modal-content">
+                            <div class="modal-header">
+                                <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+                            </div>
+                                    <div class="modal-body">
+
+                                    </div>
+                                    <div class="modal-footer">
+
+                                    </div>
+                                    </div>
+                                </div>
+                       
+                    </div>--%>
+                    
+<%--               --------------popup----------------   --%> 
+             <div class="login-frame">
+    <div class="login-box">
+        <div id="msg"></div>
+        <div class="form-groupm">
+            <label class="form-label"><span style="padding:5px; font-size:14px">Username:</span></label>
+            <asp:TextBox ID="username" runat="server" CssClass="form-control"></asp:TextBox>
+        </div>
+        <div class="form-groupm">
+            <label class="form-label"><span style="padding:5px; font-size:14px">Password: </span></label>
+            <asp:TextBox ID="password" runat="server" CssClass="form-control" TextMode="Password"></asp:TextBox>
+        </div>
+        <div class="login-actions">
+            <asp:Button ID="btn_login" runat="server" Text="Login" OnClick="btn_login_Click" CssClass="bbtn login-btn" />
+            <asp:Button ID="btn_close" runat="server" Text="Cancel" CssClass="bbtn close-login" />
+        </div>
+    </div>
+</div>
+           
+                    
+             <%--               --------------popup----------------   --%>   
+                
+                <%--<div id="log" style="height: 34px" class="log_reg ">
+                    <a href="AllAds.aspx" style="padding-right:15px; text-decoration:none; color:black";> All Ads</a>
+                    <a href="Helps and support.aspx"  style="padding-right:15px; text-decoration:none; color:black";> Helps And Support</a>
+                    <a  href="register.aspx" style="padding-right:15px; text-decoration:none; color:black"; >Register</a>
+                    
+                    <a  href="login.aspx" style=" text-decoration:none; color:black";  >
+                        <asp:HyperLink ID="HyperLink1" runat="server" CssClass="log" ForeColor="Black">jhbbjhk</asp:HyperLink>
+
+                    </a>--%>
+                   <%-- <a  href="login.aspx" id="logout"  style="padding-right:15px; text-decoration:none; color:black";  >Logout</a>--%>
+                   <%-- <a  href="ContactUs.aspx" style="padding-right:15px; text-decoration:none; color:black";  >ContactUs</a>
+                    <asp:Button ID="button" runat="server" Text="বাংলা " Width="50px" Height="30px"/>
+               
+               </div>--%>
+               <%-- <div id="profile">
+                    <asp:HyperLink ID="HyperLink2" runat="server" Font-Bold="True" BorderStyle="Ridge" BackColor="White">[HyperLink2]</asp:HyperLink>
+
+                </div>--%>
+                    
+                        </div>
+                </nav>
+                 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            
+                                <div class="modal-content">
+                            <div class="modal-header">
+                                <h4 class="modal-title" id="myModalLabel">Login</h4>
+                            </div>
+                                    <div class="modal-body form-group">
+                                        
+                                            <%--<span>UserName</span>
+                                            <asp:TextBox ID="TextBox1" CssClass="form-control" runat="server"></asp:TextBox>
+                                        --%>
+                                           <table class="nav-justified">
+                    <tr>
+                        <td>UserName</td>
+                        
+                        <td>
+                            
+                                <asp:TextBox ID="TextBox1" CssClass=" textbox form-control" placeholder="Enter UserName" runat="server"></asp:TextBox></td>
+                                                      
+                        
+                        <td>&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td>Password</td>
+                        <td>
+                            
+                            <asp:TextBox ID="TextBox3" CssClass=" textbox form-control" placeholder="Enter Password"  runat="server"></asp:TextBox></td>
+                        
+                        <td>&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td>&nbsp;</td>
+                        <td>
+                            
+                        </td>
+                        <td>&nbsp;</td>
+                    </tr>
+                </table> 
+                                        
+                                    </div>
+                                    <div class="modal-footer">
+                                        <asp:Button ID="Button3" CssClass="btn btn-success btn-sm" runat="server" Text="Submit" OnClick="Button3_Click" />
+                            <asp:Button ID="Button4" CssClass="btn btn-danger btn-sm"  runat="server" Text="Cancle" />
+                                    </div>
+                                    </div>
+                                </div>
+                       
+                    </div>
+                <%--<div id="profile">
+                    <asp:HyperLink ID="HyperLink2" runat="server" Font-Bold="True" BorderStyle="Ridge" BackColor="White">[HyperLink2]</asp:HyperLink>
+
+                </div>--%>
+                
+            </div>
+            <div class="jumbotron" style="margin-top:60px">
+                <div class="container text-center">
+                    <div id="profile">
+                        <input type="text" class="form-control pull-right" style="width:220px;margin-left:20px" placeholder="I'm searching for..." />
+                        <a href="advancesearch.aspx" class="btn btn-primary pull-right" style="margin-left:20px" >Advance Search </a>
+                    <asp:HyperLink ID="HyperLink2" CssClass="dropdown pull-right btn btn-primary" runat="server" Font-Bold="True" BorderStyle="Ridge" >[HyperLink2]</asp:HyperLink>
+
+                </div>
+                    <h1 style="text-align:center">Welcome To HomeDeal</h1>
+                <p> An Open Market Place For All. And Its Totally Free !!!</p>
+                    </div>
+            </div>
+
+            <div id="content_body">
+
+                
+
+
+                <div id="left_segment">
+                    <%--<asp:Label runat="server"> Left side Ad.</asp:Label>--%>
+                    <div id="product_category" >
+                        <%--<div class="row">
+                            <div class="col-md-3"><b>Categories</b></div>
+                        </div>--%>
+                        <div id="b" style="height:40px;padding-top:7px ;background-color:#2C2C2C;text-align:center"><b style="color:#E1FFFF; ">Categories</b><br/></div> 
+                        <div style="padding-left:10px; padding-top:10px;">
+                        <asp:Menu ID="Menu1" runat="server" DynamicEnableDefaultPopOutImage="false" StaticSubMenuIndent="10px" BackColor="#FFFBD6" DynamicHorizontalOffset="2" Font-Names="Verdana" Font-Size="0.8em" ForeColor="#990000">
+                            <DynamicHoverStyle BackColor="#990000" Font-Bold="True" ForeColor="White" />
+                            <DynamicMenuItemStyle BorderStyle="Solid" BorderWidth="1px" ForeColor="Black" HorizontalPadding="5px" VerticalPadding="2px" />
+                            <DynamicMenuStyle BackColor="#FFFBD6" />
+                            <DynamicSelectedStyle BackColor="#FFCC66" />
+                            <Items>
+                                <asp:MenuItem NavigateUrl="~/Electronics.aspx" Text="Electronics" Value="Electronics">
+                                    <asp:MenuItem NavigateUrl="~/Mobile.aspx" Text="Mobile Phones" Value="Mobile Phones"></asp:MenuItem>
+                                    <asp:MenuItem NavigateUrl="~/Tab.aspx" Text="Mobile Phones</br>accessories" Value="Mobile Phones accessories"></asp:MenuItem>
+                                    <asp:MenuItem NavigateUrl="~/Pc.aspx" Text="Tablets" Value="Tablets"></asp:MenuItem>
+                                    <asp:MenuItem NavigateUrl="~/Laptop.aspx" Text="Laptops" Value="Laptops"></asp:MenuItem>
+                                    <asp:MenuItem NavigateUrl="~/OtherElectronics.aspx" Text="Desktop</br> Computers" Value="Desktop Computers"></asp:MenuItem>
+                                    <asp:MenuItem Text="Computer</br> accessories" Value="Computer accessories"></asp:MenuItem>
+                                    <asp:MenuItem Text="TVs" Value="TVs"></asp:MenuItem>
+                                    <asp:MenuItem Text="TV &amp; Video</br> accessories" Value="TV &amp; Video accessories"></asp:MenuItem>
+                                    <asp:MenuItem Text="Cameras" Value="Cameras"></asp:MenuItem>
+                                    <asp:MenuItem NavigateUrl="~/Audio_MP3.aspx" Text="Audio &amp; MP3" Value="Audio &amp; MP3"></asp:MenuItem>
+                                    <asp:MenuItem Text="Others" Value="Others"></asp:MenuItem>
+                                </asp:MenuItem>
+                                <asp:MenuItem Text="Home &amp; Living" Value="Home &amp; Living">
+                                    <asp:MenuItem Text="Furniture" Value="Furniture"></asp:MenuItem>
+                                    <asp:MenuItem Text="Fridge &amp;</br> home appliances" Value="Fridge &amp; home appliances"></asp:MenuItem>
+                                    <asp:MenuItem Text="Power &amp; AC" Value="Power &amp; AC"></asp:MenuItem>
+                                    <asp:MenuItem Text="Decoration,art &amp;</br> textiles" Value="Decoration,art &amp; textiles"></asp:MenuItem>
+                                    <asp:MenuItem Text="Others" Value="Others"></asp:MenuItem>
+                                </asp:MenuItem>
+                                <asp:MenuItem Text="Property" Value="Property">
+                                    <asp:MenuItem Text="Apartments &amp;</br> Flats" Value="Apartments &amp; Flats"></asp:MenuItem>
+                                    <asp:MenuItem Text="Houses" Value="Houses"></asp:MenuItem>
+                                    <asp:MenuItem Text="Plots &amp; Lands" Value="Plots &amp; Lands"></asp:MenuItem>
+                                    <asp:MenuItem Text="Rooms" Value="Rooms"></asp:MenuItem>
+                                    <asp:MenuItem Text="Garages" Value="Garages"></asp:MenuItem>
+                                    <asp:MenuItem Text="Commercial</br> Property" Value="Commercial Property"></asp:MenuItem>
+                                </asp:MenuItem>
+                                <asp:MenuItem Text="Vehicles" Value="Vehicles">
+                                    <asp:MenuItem Text="Cars" Value="Cars"></asp:MenuItem>
+                                    <asp:MenuItem Text="Motorbikes &amp;</br> Scooters" Value="Motorbikes &amp; Scooters"></asp:MenuItem>
+                                    <asp:MenuItem Text="Bicycles &amp;</br> three wheelers" Value="Bicycles &amp; three wheelers"></asp:MenuItem>
+                                    <asp:MenuItem Text="Trucks &amp;</br> Buses" Value="Trucks &amp; Buses"></asp:MenuItem>
+                                    <asp:MenuItem Text="Auto parts &amp;</br> accessories" Value="Auto parts &amp; accessories"></asp:MenuItem>
+                                    <asp:MenuItem Text="Boats &amp;</br> water transports" Value="Boats &amp; water transports"></asp:MenuItem>
+                                    <asp:MenuItem Text="Others" Value="Others"></asp:MenuItem>
+                                </asp:MenuItem>
+                                <asp:MenuItem Text="Clothing,Health &amp;</br> Beauty" Value="Clothing,Health &amp; Beauty">
+                                    <asp:MenuItem Text="Clothing" Value="Clothing"></asp:MenuItem>
+                                    <asp:MenuItem Text="Shoes &amp;</br> footwear" Value="Shoes &amp; footwear"></asp:MenuItem>
+                                    <asp:MenuItem Text="Jewellery" Value="Jewellery"></asp:MenuItem>
+                                    <asp:MenuItem Text="New Item" Value="New Item"></asp:MenuItem>
+                                    <asp:MenuItem Text="Sunglasses" Value="Sunglasses"></asp:MenuItem>
+                                    <asp:MenuItem Text="Watches" Value="Watches"></asp:MenuItem>
+                                    <asp:MenuItem Text="Bags" Value="Bags"></asp:MenuItem>
+                                    <asp:MenuItem Text="health &amp; Beauty</br> Products" Value="health &amp; Beauty Products"></asp:MenuItem>
+                                    <asp:MenuItem Text="Others" Value="Others"></asp:MenuItem>
+                                </asp:MenuItem>
+                                <asp:MenuItem Text="Pets &amp;</br> Animals" Value="Pets &amp; Animals">
+                                    <asp:MenuItem Text="Pets" Value="Pets"></asp:MenuItem>
+                                    <asp:MenuItem Text="Farm animals" Value="Farm animals"></asp:MenuItem>
+                                    <asp:MenuItem Text="Pet &amp; animal</br> accessories" Value="Pet &amp; animal accessories"></asp:MenuItem>
+                                    <asp:MenuItem Text="Others" Value="Others"></asp:MenuItem>
+                                </asp:MenuItem>
+                                <asp:MenuItem Text="Hobby,Sports</br> &amp; Kids" Value="Hobby,Sports &amp; Kids">
+                                    <asp:MenuItem Text="Sports Equipment" Value="Sports Equipment"></asp:MenuItem>
+                                    <asp:MenuItem Text="Travel" Value="Travel"></asp:MenuItem>
+                                    <asp:MenuItem Text="Handicraft" Value="Handicraft"></asp:MenuItem>
+                                    <asp:MenuItem Text="Books" Value="Books"></asp:MenuItem>
+                                    <asp:MenuItem Text="Video games</br> &amp; consoles" Value="Video games &amp; consoles"></asp:MenuItem>
+                                    <asp:MenuItem Text="Children's items " Value="Children's items "></asp:MenuItem>
+                                 </asp:MenuItem>
+                                <asp:MenuItem NavigateUrl="~/Others.aspx" Text="Others" Value="Others"></asp:MenuItem>
+                            </Items>
+                            <StaticHoverStyle BackColor="#990000" Font-Bold="True" ForeColor="White" />
+                            <StaticMenuItemStyle BorderStyle="Solid" BorderWidth="1px" HorizontalPadding="5px" VerticalPadding="2px" />
+                            <StaticSelectedStyle BackColor="#FFCC66" />
+
+                            
+
+                        </asp:Menu>
+
+
+
+                          
+                        </div>
+                    </div>
+                    <div id="area">
+                      <div id="b1" style="height:40px;padding-top:7px;background-color:#2C2C2C;text-align:center"><b style="color:#E1FFFF; ">Most Liked Products</b><br/></div>
+                        <div>
+                            <asp:Repeater ID="Repeater1" runat="server">
+                                <ItemTemplate>
+                                    <asp:Table runat="server" CssClass="questionLins">
+                                        <asp:TableRow runat="server">
+                                            <asp:TableCell runat="server" CssClass="questionBlocks">
+                                                <a href="Detail.aspx?id=<%#Eval("Id").ToString()%>"><asp:Label ID ="lblname" runat="server" Text='<%#Eval("ProductName") %>'></asp:Label>
+                                                    Likes :<asp:Label id="totlike" runat="server" Text='<%#Eval("CountFav") %>'> </asp:Label>
+                                                </a>
+                                            </asp:TableCell>
+                                        </asp:TableRow>
+                                    </asp:Table>
+                                </ItemTemplate>
+                            </asp:Repeater>
+                        </div>
+
+
+                    </div>
+                 <%-- <div id="price">
+                        <b>Price limit selection</b><br />
+                        <asp:DropDownList ID="PriceLimitDropDown" runat="server">
+                            <asp:ListItem>Bdt. 1,000-5,000 </asp:ListItem>
+                            <asp:ListItem>Bdt. 5,000-10,000</asp:ListItem>
+                            <asp:ListItem>Bdt. 10,000-20,000</asp:ListItem>
+                            <asp:ListItem>Bdt. 20,000-50,000</asp:ListItem>
+                            <asp:ListItem>Bdt. 50,000+ </asp:ListItem>
+                        </asp:DropDownList>
+                    </div>--%>   
+
+                    <div id="price">
+                        <div id="Div1" style="height:20px;padding-top:7px;background-color:#2C2C2C;text-align:center"><b style="color:#E1FFFF; ">Todays News</b><br/></div>
+                        <span class="auto-style1" style="text-align:center">See Todays News Headlines</span><br />
+                    <%--<asp:DropDownList ID="PriceLimitDropDown" runat="server">
+                            <asp:ListItem>Bdt. 1,000-5,000 </asp:ListItem>
+                            <asp:ListItem>Bdt. 5,000-10,000</asp:ListItem>
+                            <asp:ListItem>Bdt. 10,000-20,000</asp:ListItem>
+                            <asp:ListItem>Bdt. 20,000-50,000</asp:ListItem>
+                            <asp:ListItem>Bdt. 50,000+ </asp:ListItem>
+                        </asp:DropDownList> --%>
+                        <div id="widgetmain" style="text-align:left;background-color:bisque; overflow-y:auto;overflow-x:hidden;width:230px;background-color:#transparent; border:0px solid #333333;"><div id="rsswidget" style="height:280px;"><iframe src="http://us1.rssfeedwidget.com/getrss.php?time=1420068614487&amp;x=http%3A%2F%2Fbdnews24.com%2F%3FwidgetName%3Drssfeed%26widgetId%3D1150%26getXmlFeed%3Dtrue&amp;w=200&amp;h=200&amp;bc=333333&amp;bw=0&amp;bgc=transparent&amp;m=20&amp;it=true&amp;t=(default)&amp;tc=333333&amp;ts=15&amp;tb=transparent&amp;il=true&amp;lc=0000FF&amp;ls=14&amp;lb=false&amp;id=true&amp;dc=333333&amp;ds=14&amp;idt=true&amp;dtc=284F2D&amp;dts=12" border="0" hspace="0" vspace="0" marginwidth="0" marginheight="0" style="border:0; padding:0; margin:0; width:200px; height:290px;" id="rssOutput" frameborder="no">Reading RSS Feed ...</iframe></div><div style="text-align:right;margin-bottom:0;border-top:0px solid #333333;" id="widgetbottom"><span style="font-size:70%">&nbsp;</span></div></div>    
+                    </div>
+
+                    
+                </div>
+               
+
+
+                <div id="main_content">
+
+                    <div id="search">
+                        <div class="form-group">
+                        <%--<asp:TextBox ID="TextBox2" CssClass="form-control inline" placeholder="Search" runat="server" Width="331px" BorderStyle="Solid" Height="35px" OnInit="Page_Load"  ></asp:TextBox>--%>
+                        
+                    </div>   
+                            <%--<asp:Button ID="Button1" CssClass="btn-info btn-sm inline" runat="server" Text="search"  />
+                        <a href="advancesearch.aspx" class="btn btn-primary" >Advance Search </a>--%>
+                    
+                        </div>
+
+
+                    
+
+
+
+
+
+
+
+                    <%--<div id="nav_key">
+                        <table id="CategoryTable""> 
+                            <tr>
+                                <td class="tableCol"><asp:HyperLink style="text-decoration:none" ID="Electronics" navigateUrl="~/Electronics.aspx" runat="server" Text="Electronics" Width="100%" Height="100%" ></asp:HyperLink></td>
+                                <td class="tableCol"><asp:HyperLink style="text-decoration:none" ID="Pet" NavigateUrl="~/Pet.aspx" runat="server" Text="Pet" Width="100%" Height="100%" ></asp:HyperLink></td>
+                                <td class="tableCol"><asp:HyperLink style="text-decoration:none" ID="Vehicles" NavigateUrl="~/Vehicles.aspx" runat="server" Text="Vehicles" Width="100%" Height="100%"></asp:HyperLink> </td>
+                                <td class="tableCol" style="border:none"> <asp:HyperLink style="text-decoration:none" ID="Home_Furnitures" NavigateUrl="~/Home_Furnitures.aspx" runat="server" Text="Furniture" Width="100%" Height="100%"></asp:HyperLink></td>
+                            </tr>
+                        </table>
+                       
+                    </div> --%>
+
+                    <div id="pad" style="margin-top:20px;">
+
+
+                       <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+               
+                    </asp:ContentPlaceHolder> 
+
+                    </div>
+                    
+                </div>
+
+                
+                <div id="right_segment">
+
+                    <asp:Label ID="Label2" runat="server">  </asp:Label>
+                    <div id="ad1">
+                        <div id="Div2" style="height:40px;padding-top:7px;background-color:#2C2C2C;text-align:center"><b style="color:#E1FFFF; ">Post Your Free Ads</b><br/></div>
+                        
+                            <a href="http://localhost:1229/PostAd1.aspx" > <p style="text-decoration:none; color:black; float: left; padding-left: 10px ;"></p> <img src="IMG/imes.jpg" style="height:160px; width:195px;" /> </a>
+                    </div>
+                    <div id="ad2">
+                        <div id="Div3" style="height:40px;padding-top:7px;background-color:#2C2C2C;text-align:center"><b style="color:#E1FFFF; ">HomeDeal Forum</b><br/></div>
+                        <a href="http://localhost:1229/Forum.aspx" > <p style="text-decoration:none; color:black; float: left;padding-left: 10px";></p> <img src="IMG/forumlogo.jpg" style="height:160px; width:195px;" /> </a>
+                    </div>
+                    <div id="ad3">
+                        <div id="Div4" style="height:40px;padding-top:7px;background-color:#2C2C2C;text-align:center"><b style="color:#E1FFFF; ">See Your WishlistItem</b><br/></div>
+                        <a href="Wishlist.aspx" > <p style="text-decoration:none; color:black; float: left;padding-left: 10px;"></p> <img src="IMG/wishlist.jpg" style="height:160px; width:195px;"/> </a>
+                    </div>
+                </div>
+                
+            </div>
+            
+            
+            <%--<marquee behavior="alternate">
+<img src="http://www.html.am/images/html-codes/marquees/coffee.gif" width="150" height="108" alt="Cup of coffee on saucer" />
+</marquee>--%>
+
+
+
+        
+   </div>
+      
+                
+    </form>
+     
+    <script src="javascript/jquery.js"></script>
+    <script src="javascript/bootstrap.min.js"></script>
+</body>
+
+</html>
